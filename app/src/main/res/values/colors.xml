@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand">#FF8A3D</color>
+    <color name="brand_dark">#E2721C</color>
+    <color name="accent">#4DD0E1</color>
+    <color name="bg">#121212</color>
+    <color name="surface">#1E1E1E</color>
+    <color name="surface2">#2A2A2A</color>
+    <color name="text_primary">#EDEDED</color>
+    <color name="text_secondary">#9E9E9E</color>
+    <!-- 浅色卡片（bg_card/bg_card_alt）上的深色文字 -->
+    <color name="text_on_card">#2B3A1F</color>
+    <color name="danger">#EF5350</color>
+    <color name="success">#66BB6A</color>
+    <color name="ic_launcher_background">#FF8A3D</color>
+</resources>

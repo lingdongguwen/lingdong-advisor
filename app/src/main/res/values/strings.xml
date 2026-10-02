@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">灵动豹豹</string>
+    <string name="accessibility_desc">灵动豹豹通过无障碍服务在您主动授权后，模拟点击、滑动与输入，用于您自己编写/录制的自动化脚本。请勿用于任何未经授权或违反第三方服务条款的场景。</string>
+
+    <string name="main_hint_empty">还没有脚本。点击右下角 + 新建一个 Lua 脚本。</string>
+    <string name="btn_new_script">新建脚本</string>
+    <string name="btn_run">运行</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_capture">截屏</string>
+    <string name="btn_template">模板</string>
+    <string name="btn_pick_color">取色</string>
+    <string name="btn_save_template">保存选区为模板</string>
+    <string name="btn_recapture">重新截屏</string>
+    <string name="btn_back">返回</string>
+    <string name="btn_open_accessibility">开启无障碍服务</string>
+    <string name="btn_open_capture">开启屏幕捕获</string>
+    <string name="btn_open_settings">设置</string>
+    <string name="btn_about">关于</string>
+
+    <string name="template_name_hint">模板名称（如 icon_login）</string>
+    <string name="toast_accessibility_off">请先在系统设置中开启灵动豹豹的无障碍服务</string>
+    <string name="toast_capture_off">请先开启屏幕捕获以截取整屏画面</string>
+    <string name="toast_script_empty">脚本内容为空</string>
+    <string name="toast_saved">已保存</string>
+    <string name="toast_template_saved">模板已保存</string>
+    <string name="toast_no_template">未找到该模板图片</string>
+    <string name="toast_capture_done">截屏完成，可在画面上框选区域或取色</string>
+    <string name="log_prefix">› </string>
+    <string name="about_text">灵动豹豹 是一款面向个人自用的安卓自动化工具。\n\n· 所有脚本均由用户自行编写或录制，工具仅提供执行能力。\n· 不内置任何第三方脚本，不抓取、不注入任何应用数据。\n· 无障碍能力与屏幕捕获均需在您主动授权后使用，全程本地运行。\n· 本软件为原创实现，与任何第三方自动化产品无隶属或代码关联。</string>
+</resources>

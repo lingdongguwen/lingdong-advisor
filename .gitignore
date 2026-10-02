@@ -1,0 +1,13 @@
+# 构建产物与大文件（不入库，避免推送超大文件）
+*.apk
+artifact*.zip
+artifact_extract/
+*.log
+build/
+.gradle/
+.gradle/
+node_modules/
+captures/
+.externalNativeBuild/
+local.properties
+output.json

@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group android:translateX="34" android:translateY="34">
+        <!-- 抽象“豹”之能量标记：圆角方块内嵌闪电 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M22,4 L10,26 L20,26 L16,44 L34,20 L24,20 Z" />
+    </group>
+</vector>

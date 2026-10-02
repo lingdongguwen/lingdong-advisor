@@ -1,0 +1,73 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.yuanlingbb.auto'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.yuanlingbb.auto"
+        minSdk 28
+        targetSdk 35
+        versionCode 6
+        versionName "1.1.0.2"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+        ndk {
+            // 同时打包 arm64-v8a（真机/小米12S Ultra）与 x86_64（雷电9 模拟器），确保两类设备均可安装运行
+            abiFilters 'arm64-v8a', 'x86_64'
+        }
+    }
+
+    // 固定签名 keystore：所有构建（debug/release）共用，保证覆盖安装时签名一致
+    signingConfigs {
+        release {
+            storeFile file('lingdong-release.keystore')
+            storePassword 'yuanling2026'
+            keyAlias 'yuanling'
+            keyPassword 'yuanling2026'
+            storeType 'pkcs12'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        buildConfig true
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+
+    // 视觉引擎：OpenCV（找图模板匹配 / 找色）— 标准库，非业务代码
+    implementation 'org.opencv:opencv:4.10.0'
+    // 中文 OCR：Google ML Kit
+    implementation 'com.google.mlkit:text-recognition-chinese:16.0.1'
+    // 脚本引擎：Lua（luaj，MIT）
+    implementation 'org.luaj:luaj-jse:3.0.1'
+}

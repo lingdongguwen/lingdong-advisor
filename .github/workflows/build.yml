@@ -1,0 +1,62 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Accept Android licenses & ensure SDK platform 35
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses >/dev/null 2>&1
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Ensure fixed signing keystore (生成一次并提交，保证覆盖安装签名一致)
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ ! -f app/lingdong-release.keystore ]; then
+            keytool -genkeypair -v \
+              -keystore app/lingdong-release.keystore \
+              -storetype PKCS12 \
+              -storepass yuanling2026 -keypass yuanling2026 \
+              -alias yuanling -keyalg RSA -keysize 2048 -validity 10000 \
+              -dname "CN=YuanLing BaoBao, O=YuanLing, C=CN"
+            git config user.email "ci@yuanling.local"
+            git config user.name "yuanling-ci"
+            git remote set-url origin https://x-access-token:${TOKEN}@github.com/lingdongguwen/lingdong-advisor.git
+            git add app/lingdong-release.keystore
+            git commit -m "chore: add fixed signing keystore [skip ci]"
+            git push origin HEAD:main
+          fi
+
+      - name: Build debug APK
+        uses: gradle/gradle-build-action@v3
+        with:
+          gradle-version: '8.9'
+          arguments: assembleDebug
+          cache-disabled: true
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: yuanling-baobao-debug
+          path: app/build/outputs/apk/debug/*.apk
