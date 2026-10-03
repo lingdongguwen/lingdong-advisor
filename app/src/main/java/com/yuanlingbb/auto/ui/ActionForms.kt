@@ -102,7 +102,7 @@ object ActionForms {
                 Toast.makeText(ctx, "已导入模板：$name", Toast.LENGTH_SHORT).show()
                 // 关闭当前表单并以最新模板列表重新打开
                 currentDialog?.dismiss()
-                pendingAction?.let { a -> ctxRef?.let { c -> show(c, a, {}) } }
+                pendingAction?.let { a -> ctxRef?.let { c -> show(c, a, onSaved = {}) } }
             }
             REQ_GALLERY_COLOR -> {
                 val path = copyUriToCache(ctx, uri, "color_pick.png") ?: run {
