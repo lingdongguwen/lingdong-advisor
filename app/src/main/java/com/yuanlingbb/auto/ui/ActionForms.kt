@@ -20,6 +20,7 @@ import com.yuanlingbb.auto.data.Action
 import com.yuanlingbb.auto.data.Condition
 import com.yuanlingbb.auto.data.Task
 import com.yuanlingbb.auto.data.TaskStore
+import com.yuanlingbb.auto.R
 import java.io.File
 
 /**
@@ -172,7 +173,7 @@ object ActionForms {
             .show()
     }
 
-    fun show(activity: Activity, action: Action, onSaved: () -> Unit, onSave: (() -> Unit)? = null) {
+    fun show(activity: Activity, action: Action, onSave: (() -> Unit)? = null, onSaved: () -> Unit) {
         val ctx = activity
         ctxRef = activity
         pendingAction = action
@@ -538,12 +539,12 @@ object ActionForms {
     }
 
     private fun styleEdit(e: EditText) {
+        val d = e.resources.displayMetrics.density
         e.setTextColor(0xFF222222.toInt())
         e.setHintTextColor(0xFF999999.toInt())
         e.setBackgroundResource(0)
-        e.background = roundRect(0xFFF3F3F3.toInt(), dp(e.context as Activity, 8).toFloat())
-        e.setPadding(dp(e.context as Activity, 12), dp(e.context as Activity, 10),
-            dp(e.context as Activity, 12), dp(e.context as Activity, 10))
+        e.background = roundRect(0xFFF3F3F3.toInt(), (8 * d).toInt().toFloat())
+        e.setPadding((12 * d).toInt(), (10 * d).toInt(), (12 * d).toInt(), (10 * d).toInt())
     }
 
     private fun rowText(ctx: Activity, parent: LinearLayout, label: String, value: String): EditText {
